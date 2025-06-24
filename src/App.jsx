@@ -33,8 +33,8 @@ function HomePage() {
   ];
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-      <Box textAlign="center" mb={4}>
+    <Container maxWidth="md" sx={{ mt: 4, mb: 4, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <Box textAlign="center" mb={4} width="100%">
         <Typography variant="h3" component="h1" gutterBottom color="primary">
           🚗 Oficina Mecânica
         </Typography>
@@ -42,10 +42,9 @@ function HomePage() {
           Sistema de Gerenciamento Completo
         </Typography>
       </Box>
-      
-      <Grid container spacing={3}>
+      <Grid container spacing={3} justifyContent="center">
         {menuItems.map((item) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={item.path}>
+          <Grid item xs={12} sm={6} md={4} key={item.path} display="flex" justifyContent="center">
             <Card 
               sx={{ 
                 height: '100%', 
@@ -121,28 +120,32 @@ export default function App() {
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             🚗 Oficina Mecânica
           </Typography>
-          <Button color="inherit" component={Link} to="/">Início</Button>
-          <Button color="inherit" component={Link} to="/clientes">Clientes</Button>
-          <Button color="inherit" component={Link} to="/funcionarios">Funcionários</Button>
-          <Button color="inherit" component={Link} to="/veiculos">Veículos</Button>
-          <Button color="inherit" component={Link} to="/pecas">Peças</Button>
-          <Button color="inherit" component={Link} to="/servicos">Serviços</Button>
-          <Button color="inherit" component={Link} to="/ordens">Ordens</Button>
+          <Box sx={{ display: 'flex', justifyContent: 'center', flexGrow: 2 }}>
+            <Button color="inherit" component={Link} to="/">Início</Button>
+            <Button color="inherit" component={Link} to="/clientes">Clientes</Button>
+            <Button color="inherit" component={Link} to="/funcionarios">Funcionários</Button>
+            <Button color="inherit" component={Link} to="/veiculos">Veículos</Button>
+            <Button color="inherit" component={Link} to="/pecas">Peças</Button>
+            <Button color="inherit" component={Link} to="/servicos">Serviços</Button>
+            <Button color="inherit" component={Link} to="/ordens">Ordens</Button>
+          </Box>
         </Toolbar>
       </AppBar>
-      <Box sx={{ minHeight: 'calc(100vh - 64px)', bgcolor: 'grey.50' }}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/clientes" element={<ClientesPage />} />
-          <Route path="/funcionarios" element={<FuncionariosPage />} />
-          <Route path="/veiculos" element={<VeiculosPage />} />
-          <Route path="/pecas" element={<PecasPage />} />
-          <Route path="/servicos" element={<ServicosPage />} />
-          <Route path="/ordens" element={<OrdensPage />} />
-          <Route path="/itens-peca" element={<ItensPecaPage />} />
-          <Route path="/itens-servico" element={<ItensServicoPage />} />
-          <Route path="*" element={<HomePage />} />
-        </Routes>
+      <Box sx={{ minHeight: '100vh', minWidth: '100vw', bgcolor: 'white', display: 'flex', flexDirection: 'column' }}>
+        <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/clientes" element={<ClientesPage />} />
+            <Route path="/funcionarios" element={<FuncionariosPage />} />
+            <Route path="/veiculos" element={<VeiculosPage />} />
+            <Route path="/pecas" element={<PecasPage />} />
+            <Route path="/servicos" element={<ServicosPage />} />
+            <Route path="/ordens" element={<OrdensPage />} />
+            <Route path="/itens-peca" element={<ItensPecaPage />} />
+            <Route path="/itens-servico" element={<ItensServicoPage />} />
+            <Route path="*" element={<HomePage />} />
+          </Routes>
+        </Box>
       </Box>
     </Router>
   );

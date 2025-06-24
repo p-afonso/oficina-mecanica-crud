@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import {
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
-  Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, IconButton, Stack
+  Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, IconButton, Stack, Box, Container
 } from '@mui/material';
 import { Edit, Delete } from '@mui/icons-material';
 
@@ -49,55 +49,57 @@ export default function ClientesCrud() {
   };
 
   return (
-    <>
-      <Stack direction="row" justifyContent="space-between" alignItems="center" mb={2}>
-        <h2>Clientes</h2>
-        <Button variant="contained" onClick={() => handleOpen()}>Novo Cliente</Button>
-      </Stack>
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Nome</TableCell>
-              <TableCell>Telefone</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Endereço</TableCell>
-              <TableCell>Ações</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {clientes.map(cliente => (
-              <TableRow key={cliente.id_cliente}>
-                <TableCell>{cliente.id_cliente}</TableCell>
-                <TableCell>{cliente.nome}</TableCell>
-                <TableCell>{cliente.telefone}</TableCell>
-                <TableCell>{cliente.email}</TableCell>
-                <TableCell>{cliente.endereco}</TableCell>
-                <TableCell>
-                  <IconButton onClick={() => handleOpen(cliente)}><Edit /></IconButton>
-                  <IconButton color="error" onClick={() => handleDelete(cliente.id_cliente)}><Delete /></IconButton>
-                </TableCell>
+    <Container maxWidth="md" sx={{ mt: 4, mb: 4, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <Box sx={{ width: '100%' }}>
+        <Stack direction="row" justifyContent="space-between" alignItems="center" mb={2} sx={{ width: '100%' }}>
+          <h2>Clientes</h2>
+          <Button variant="contained" onClick={() => handleOpen()}>Novo Cliente</Button>
+        </Stack>
+        <TableContainer component={Paper} sx={{ width: '100%' }}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>ID</TableCell>
+                <TableCell>Nome</TableCell>
+                <TableCell>Telefone</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>Endereço</TableCell>
+                <TableCell>Ações</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>{editing ? 'Editar Cliente' : 'Novo Cliente'}</DialogTitle>
-        <form onSubmit={handleSubmit}>
-          <DialogContent>
-            <TextField margin="dense" label="Nome" name="nome" value={form.nome} onChange={handleChange} fullWidth required />
-            <TextField margin="dense" label="Telefone" name="telefone" value={form.telefone} onChange={handleChange} fullWidth />
-            <TextField margin="dense" label="Email" name="email" value={form.email} onChange={handleChange} fullWidth />
-            <TextField margin="dense" label="Endereço" name="endereco" value={form.endereco} onChange={handleChange} fullWidth />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Cancelar</Button>
-            <Button type="submit" variant="contained">Salvar</Button>
-          </DialogActions>
-        </form>
-      </Dialog>
-    </>
+            </TableHead>
+            <TableBody>
+              {clientes.map(cliente => (
+                <TableRow key={cliente.id_cliente}>
+                  <TableCell>{cliente.id_cliente}</TableCell>
+                  <TableCell>{cliente.nome}</TableCell>
+                  <TableCell>{cliente.telefone}</TableCell>
+                  <TableCell>{cliente.email}</TableCell>
+                  <TableCell>{cliente.endereco}</TableCell>
+                  <TableCell>
+                    <IconButton onClick={() => handleOpen(cliente)}><Edit /></IconButton>
+                    <IconButton color="error" onClick={() => handleDelete(cliente.id_cliente)}><Delete /></IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>{editing ? 'Editar Cliente' : 'Novo Cliente'}</DialogTitle>
+          <form onSubmit={handleSubmit}>
+            <DialogContent>
+              <TextField margin="dense" label="Nome" name="nome" value={form.nome} onChange={handleChange} fullWidth required />
+              <TextField margin="dense" label="Telefone" name="telefone" value={form.telefone} onChange={handleChange} fullWidth />
+              <TextField margin="dense" label="Email" name="email" value={form.email} onChange={handleChange} fullWidth />
+              <TextField margin="dense" label="Endereço" name="endereco" value={form.endereco} onChange={handleChange} fullWidth />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose}>Cancelar</Button>
+              <Button type="submit" variant="contained">Salvar</Button>
+            </DialogActions>
+          </form>
+        </Dialog>
+      </Box>
+    </Container>
   );
 } 
